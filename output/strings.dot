@@ -1,0 +1,17 @@
+digraph goDependencyGraph {
+  label="strings";
+  labeljust="1";
+  fontname="Ubuntu";
+  fontcolor="#222222";
+  fontsize="13";
+  bgcolor="lightsteelblue";
+  style="solid";
+  penwidth="1.0";
+  pad="0.0";
+  nodesep="1.0";
+
+  node [shape="ellipse" style="filled" fillcolor="lightblue" fontname="Ubuntu" penwidth="1.0" margin="0.05, 0.0"];
+  edge [color="#000000"]
+
+  "strings" -> { "errors" "io" "unicode" "unicode/utf8" } "io" -> { "errors" "sync" } "sync" -> { "internal/race" "runtime" "sync/atomic" "unsafe" } "internal/race" -> { "unsafe" } "runtime" -> { "runtime/internal/atomic" "runtime/internal/sys" "unsafe" } "runtime/internal/atomic" -> { "unsafe" } "sync/atomic" -> { "unsafe" } 
+}
