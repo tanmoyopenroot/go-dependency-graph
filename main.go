@@ -4,13 +4,16 @@ import (
 	"os"
 	"fmt"
 	"flag"
+	"strings"
 	"go/build"
 )
 
 var (
 	showStdLib = flag.Bool("show-std", false, "Show dependencies os Standard Library")
 	depLevel = flag.Int("level", -1, "Dept of Dependency Graph")
+	ignorePkgs = flag.String("ignore", "", "Ignore packages in dependency graph")
 
+	ignoredPkgs = map[string]bool{}
 	pkgList = map[string]bool{}
 	graphList = map[string]bool{}
 	pkgDeps = make(map[string][]string)
@@ -26,6 +29,10 @@ func getImports(pkg *build.Package) []string{
 func processEachPackage(dir string, pkgName string) error {
 	// fmt.Println("Directory: ", dir)
 	// fmt.Println("Current Package Processing: ", pkgName)
+
+	if ignoredPkgs[pkgName] {
+		return nil
+	}
 
 	pkg, err := buildContext.Import(pkgName, dir, 0)
 	if err != nil {
@@ -60,6 +67,12 @@ func main() {
 		fmt.Println("Invalid Arguments!")
 	} else {
 		fmt.Println("Arguments: ", args)
+	}
+
+	if *ignorePkgs != "" {
+		for _, pkg := range strings.Split(*ignorePkgs, ",") {
+			ignoredPkgs[pkg] = true
+		}
 	}
 
 	cwd, err := os.Getwd()

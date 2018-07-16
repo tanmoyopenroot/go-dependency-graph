@@ -68,3 +68,26 @@ fmt
 ```
 
 ![picture](screenshot/fmt.png)
+
+### -ignore
+
+Remove packages from your dependency graph.
+
+```sh
+go run main.go const.go dot-graph.go generate-dependency-graph.go show-dependency-tree.go dot-template.go -show-std=true -ignore=sync,reflect,os fmt
+Arguments:  [fmt]
+fmt
+ ├ errors
+ ├ io
+   ├ errors
+ ├ math
+   └ unsafe
+ ├ strconv
+   ├ errors
+   ├ math
+     └ unsafe
+   └ unicode/utf8
+ └ unicode/utf8
+```
+
+![picture](screenshot/fmt-ignore.png)

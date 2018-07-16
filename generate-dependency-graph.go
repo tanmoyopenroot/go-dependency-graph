@@ -33,6 +33,10 @@ func concatDeps(pkgName string) string {
 	buffer.WriteString("\" -> { ")
 
 	for _, dep := range pkgDeps[pkgName] {
+		if ignoredPkgs[dep] {
+			continue
+		}
+
 		buffer.WriteString("\"")
 		buffer.WriteString(dep)
 		buffer.WriteString("\" ")
@@ -86,6 +90,10 @@ func ProcessGoGraph(pkgName string, level int) {
 	
 		if (level != -1) {
 			level = level - 1
+		}
+
+		if ignoredPkgs[pkgName] {
+			return
 		}
 
 		buffer.WriteString(concatDeps(pkgName))
