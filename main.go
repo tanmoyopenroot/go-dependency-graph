@@ -67,21 +67,16 @@ func main() {
 		fmt.Println("Failed to get current working directory")
 	} 
 
-
-
 	for _, pkgName := range args {
 		err := processEachPackage(cwd, pkgName)
+		ShowGoDeps(pkgName)
+		ProcessGoGraph(pkgName)
 		if err != nil {
 			fmt.Println("Error while processing the: ", pkgName, err)
+			break
 		}
 	}
 
 	// fmt.Println("Package Details:")
 	// fmt.Println(pkgDeps)
-
-
-	for _, pkgName := range args {
-		ShowGoDeps(pkgName)
-		ProcessGoGraph(pkgName)
-	}
 }

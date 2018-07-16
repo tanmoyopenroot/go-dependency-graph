@@ -23,6 +23,7 @@ func showSubDeps(pkgName string, padding int, lastPkg bool) {
 	}
 }
 
+// ShowGoDeps ... Show the Dependency in CMD
 func ShowGoDeps(pkgName string) {
 	if _, pkgExist := pkgDeps[pkgName]; pkgExist {
 		fmt.Println(pkgName)
@@ -31,7 +32,5 @@ func ShowGoDeps(pkgName string) {
 		for index, subPack := range pkgs {
 			showSubDeps(subPack, padding, index == len(pkgs)-1)
 		}
-	} else {
-		fmt.Println("Uable to find %s in dependency list", pkgName)
 	}
 }

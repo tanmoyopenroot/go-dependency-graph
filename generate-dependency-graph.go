@@ -64,6 +64,7 @@ func processSubGraph(pkgName string) string {
 	return buffer.String()
 }
 
+// ProcessGoGraph ... Generate a Graphviz's dot format file
 func ProcessGoGraph(pkgName string) {
 	if _, pkgExist := pkgDeps[pkgName]; pkgExist {
 		pkgs := pkgDeps[pkgName]
@@ -84,7 +85,5 @@ func ProcessGoGraph(pkgName string) {
 		}
 
 		writeDot(dot)
-	} else {
-		fmt.Println("Uable to find %s in dependency list", pkgName)
 	}
 }
