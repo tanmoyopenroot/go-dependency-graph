@@ -12,7 +12,7 @@ func writeDot(g DotGraph) {
 	file := strings.Join([]string{g.Title, ".dot"}, "")
 	f, err := os.Create(file)
 	if err != nil {
-		fmt.Println("Unable to create %s file", file)
+		fmt.Println("Unable to create file :=> ", file)
 		return
 	}
 

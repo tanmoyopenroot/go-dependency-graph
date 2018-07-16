@@ -1,5 +1,6 @@
 package main
 
+// DotTemplate ... Graph template for Graphviz
 const DotTemplate = `
   digraph goDependencyGraph {
     label="{{ .Title }}";
