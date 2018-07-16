@@ -9,7 +9,7 @@ import (
 
 var (
 	showStdLib = flag.Bool("show-std", false, "Show dependencies os Standard Library")
-	depLevel = flag.Int("level", 10, "Dept of Dependency Graph")
+	depLevel = flag.Int("level", -1, "Dept of Dependency Graph")
 
 	pkgList = map[string]bool{}
 	graphList = map[string]bool{}
@@ -69,8 +69,8 @@ func main() {
 
 	for _, pkgName := range args {
 		err := processEachPackage(cwd, pkgName)
-		ShowGoDeps(pkgName)
-		ProcessGoGraph(pkgName)
+		ShowGoDeps(pkgName, *depLevel)
+		ProcessGoGraph(pkgName, *depLevel)
 		if err != nil {
 			fmt.Println("Error while processing the: ", pkgName, err)
 			break

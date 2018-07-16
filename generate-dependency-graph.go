@@ -43,7 +43,15 @@ func concatDeps(pkgName string) string {
 	return buffer.String()
 }
 
-func processSubGraph(pkgName string) string {
+func processSubGraph(pkgName string, level int) string {
+	if (level != -1 && level < 1) {
+		return ""
+	} 
+
+	if (level != -1) {
+		level = level - 1
+	}
+
 	var buffer bytes.Buffer
 	pkgs := pkgDeps[pkgName]
 
@@ -59,23 +67,30 @@ func processSubGraph(pkgName string) string {
 
 	buffer.WriteString(concatDeps(pkgName))
 	for _, subPack := range pkgs {
-		buffer.WriteString(processSubGraph(subPack))
+		buffer.WriteString(processSubGraph(subPack, level))
 	}
 	return buffer.String()
 }
 
 // ProcessGoGraph ... Generate a Graphviz's dot format file
-func ProcessGoGraph(pkgName string) {
+func ProcessGoGraph(pkgName string, level int) {
 	if _, pkgExist := pkgDeps[pkgName]; pkgExist {
 		pkgs := pkgDeps[pkgName]
 		graphList = map[string]bool{}
 		var buffer bytes.Buffer
 
 		graphList[pkgName] = true
+		if (level != -1 && level < 1) {
+			return
+		} 
+	
+		if (level != -1) {
+			level = level - 1
+		}
 
 		buffer.WriteString(concatDeps(pkgName))
 		for _, pkg := range pkgs {
-			buffer.WriteString(processSubGraph(pkg))	
+			buffer.WriteString(processSubGraph(pkg, level))	
 		}
 
 		// fmt.Println(buffer.String())

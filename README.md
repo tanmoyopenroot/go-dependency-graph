@@ -48,3 +48,23 @@ $ eog strings.png
 ```
 
 ![picture](screenshot/strings.png)
+
+### -level and -show-std
+
+Decide your dependency graph level and also choose whether to show standard library.
+
+```sh
+go run main.go const.go dot-graph.go generate-dependency-graph.go show-dependency-tree.go dot-template.go -show-std=true -level=1 fmt
+Arguments:  [fmt]
+fmt
+ ├ errors
+ ├ io
+ ├ math
+ ├ os
+ ├ reflect
+ ├ strconv
+ ├ sync
+ └ unicode/utf8
+```
+
+![picture](screenshot/fmt.png)
