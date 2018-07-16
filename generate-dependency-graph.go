@@ -8,7 +8,7 @@ import (
 	"text/template"
 )
 
-func WriteDot(g DotGraph) {
+func writeDot(g DotGraph) {
 	file := strings.Join([]string{g.Title, ".dot"}, "")
 	f, err := os.Create(file)
 	if err != nil {
@@ -16,7 +16,7 @@ func WriteDot(g DotGraph) {
 		return
 	}
 
-	t := template.Must(template.New("dot.template").ParseFiles("template/dot.template"))
+	t := template.Must(template.New("dot.template").Parse(DotTemplate))
 	err = t.Execute(f, g)
 	if err != nil {
 		fmt.Println("Error while excuting the graph template")
@@ -64,7 +64,7 @@ func processSubGraph(pkgName string) string {
 	return buffer.String()
 }
 
-func processGraph(pkgName string) {
+func ProcessGoGraph(pkgName string) {
 	if _, pkgExist := pkgDeps[pkgName]; pkgExist {
 		pkgs := pkgDeps[pkgName]
 		graphList = map[string]bool{}
@@ -83,7 +83,7 @@ func processGraph(pkgName string) {
 			DepsPath: buffer.String(),
 		}
 
-		WriteDot(dot)
+		writeDot(dot)
 	} else {
 		fmt.Println("Uable to find %s in dependency list", pkgName)
 	}

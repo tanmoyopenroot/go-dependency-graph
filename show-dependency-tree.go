@@ -23,7 +23,7 @@ func showSubDeps(pkgName string, padding int, lastPkg bool) {
 	}
 }
 
-func showDeps(pkgName string) {
+func ShowGoDeps(pkgName string) {
 	if _, pkgExist := pkgDeps[pkgName]; pkgExist {
 		fmt.Println(pkgName)
 		padding := 0

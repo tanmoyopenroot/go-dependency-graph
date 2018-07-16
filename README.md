@@ -2,18 +2,17 @@
 
 Purpose of this tool is to provide a visual dependency overview of your program.
 
-## Install
+## Required
 
 ```sh
 sudo apt-get install graphviz
-go get github.com/tanmoyopenroot/go-dependency-graph
 ```
 ### Command-Line
 
 Simply execute main.go with one or more package names to visualize.
 
 ```sh
-$ go run main.go -show-std=true strings
+$ go run main.go const.go dot-graph.go generate-dependency-graph.go show-dependency-tree.go dot-template.go -show-std=true strings
 Arguments:  [strings]
 strings
  ├ errors

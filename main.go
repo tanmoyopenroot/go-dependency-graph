@@ -5,11 +5,6 @@ import (
 	"fmt"
 	"flag"
 	"go/build"
-
-	"github.com/tanmoyopenroot/go-dependency-graph/cmd/const/main"
-	"github.com/tanmoyopenroot/go-dependency-graph/cmd/dot-graph/main"
-	"github.com/tanmoyopenroot/go-dependency-graph/cmd/generate-dependency-graph/main"
-	"github.com/tanmoyopenroot/go-dependency-graph/cmd/show-dependency-tree/main"
 )
 
 var (
@@ -86,7 +81,7 @@ func main() {
 
 
 	for _, pkgName := range args {
-		showDeps(pkgName)
-		processGraph(pkgName)
+		ShowGoDeps(pkgName)
+		ProcessGoGraph(pkgName)
 	}
 }
