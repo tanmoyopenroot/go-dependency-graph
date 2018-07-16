@@ -2,11 +2,18 @@
 
 Purpose of this tool is to provide a visual dependency overview of your program.
 
-## Required
+## Required For Visual
 
 ```sh
 sudo apt-get install graphviz
 ```
+
+## Install
+
+```sh
+go get github.com/tanmoyopenroot/go-dependency-graph
+```
+
 ### Command-Line
 
 Simply execute main.go with one or more package names to visualize.
@@ -33,7 +40,8 @@ strings
  └ unicode/utf8
 ```
 
-This generates a Graphviz's dot format file, to view execute the following: 
+This generates a Graphviz's dot format file, to view execute the following:
+
 ```sh
 $ dot -Tpng strings.dot -o strings.png
 $ eog strings.png
